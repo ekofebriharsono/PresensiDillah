@@ -128,10 +128,10 @@ if($_SESSION['id'] == ''){
                                 <label for="exampleInputPassword1">Sampai Tanggal</label>
                                 <input type="date" name="tanggal_end" class="form-control" id="exampleInputPassword1" placeholder="Password">
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="exampleInputPassword1">Nama Siswa</label>
                                 <input type="input" name="nama" class="form-control" placeholder="Nama Siswa">
-                            </div>
+                            </div> -->
                         </div>
                         <div class="card-footer">
                         <button type="submit" class="btn btn-primary">Cari Data</button>
@@ -165,12 +165,12 @@ if($_SESSION['id'] == ''){
                 $tgl_end = $_GET['tanggal_end'];
                 $nama = " and tanggal BETWEEN cast('$tgl_start' as date) and cast('$tgl_end' as date)";
               }
-              if(@$_GET['nama'] != ''){
-                $isNama = true;
-                $nama = " and nama %".$_GET['nama']."%";
-              }
+              // if(@$_GET['nama'] != ''){
+              //   $isNama = true;
+              //   $nama = " and nama %".$_GET['nama']."%";
+              // }
 
-              $query = "select * from presensi where ".$kelas.$nama.$tanggal." order by nama asc";
+              $query = "select * from presensi where ".$kelas.$tanggal." order by nama asc";
               $res = mysqli_query($con, $query);
 
               
@@ -181,7 +181,13 @@ if($_SESSION['id'] == ''){
             if($isFilter){ ?>
             <div class="row">
               <div class="col-md-12"> 
-                <center><button class="btn btn-success">Export Excel</button></center>
+                <form action="excel.php" method="post">
+                <input type="text" hidden name="kelas" value="<?php echo @$_GET['kelas'];?>">
+                  <input type="text" hidden name="tanggal_start" value="<?php echo $tgl_start;?>">
+                  <input type="text" hidden name="tanggal_end" value="<?php echo $tgl_end;?>">
+                  <input type="text" hidden name="query" value="<?php echo $query;?>">
+                <center><button type="submit" class="btn btn-success">Export Excel</button></center>
+                </form>
               </div>
               <!-- <div class="col-md-6"> 
                 <center><button class="btn btn-danger">Export PDF</button></center>
