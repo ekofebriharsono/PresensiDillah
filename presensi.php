@@ -18,15 +18,21 @@
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link rel="shortcut icon" href="smp8.png" />
+
 </head>
-<body class="hold-transition login-page">
+<body id="bodycolor" style="background-color:grey;">
+<div class="hold-transition d-flex justify-content-center">
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>PRESENSI KELAS 8 SMP NEGERI 8 SURABAYA</b></a>
+      
+    <a href="#" style="color:black;"><b>PRESENSI KELAS 8 SMP NEGERI 8 SURABAYA</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
+    <center><img src="smp8.png" style="width: 100px; height: 100px; "></center>
+
     <?php
         if(isset($_GET['info'])){
             if ($_GET['info'] == "Presensi_Sukses"){
@@ -105,6 +111,8 @@
     <!-- /.login-card-body -->
   </div>
 </div>
+</div>
+
 <!-- /.login-box -->
 
 <!-- jQuery -->

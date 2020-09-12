@@ -20305,6 +20305,10 @@ html.maximized-card {
   margin-top: 10px;
 }
 
+#bodycolor {
+  background-color: #001730;
+}
+
 .login-logo,
 .register-logo {
   font-size: 2.1rem;
@@ -20327,21 +20331,22 @@ html.maximized-card {
   display: flex;
   -ms-flex-direction: column;
   flex-direction: column;
-  height: 100vh;
+  height: auto;
   -ms-flex-pack: center;
   justify-content: center;
 }
 
 .login-box,
 .register-box {
-  width: 360px;
+  width: 760px;
 }
+
 
 @media (max-width: 576px) {
   .login-box,
   .register-box {
     margin-top: .5rem;
-    width: 90%;
+    width: 100%;
   }
 }
 
