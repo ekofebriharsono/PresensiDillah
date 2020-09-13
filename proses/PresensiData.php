@@ -7,6 +7,7 @@ $nis = $_POST['nis'];
 $kelas = $_POST['kelas'];
 $tanggal = $_POST['tanggal'];
 $keterangan = $_POST['keterangan'];
+date_default_timezone_set('Asia/Jakarta');
 $dateNow = date("Y-m-d");
 if($tanggal <= $dateNow){
     $sqlCek = "select * from presensi where nis = $nis and tanggal = '$tanggal'";
@@ -25,7 +26,12 @@ if($tanggal <= $dateNow){
         header("Location: ../presensi.php?info=Telah_Presensi");
     }
 } else {
-    header("Location: ../presensi.php?info=Melebihi_Tanggal_Sekarang");
+ header("Location: ../presensi.php?info=Melebihi_Tanggal_Sekarang");
+
+ echo $tanggal ; 
+ echo '<br>';
+ echo $dateNow; 
+
 }
 
 

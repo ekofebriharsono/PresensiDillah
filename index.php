@@ -124,11 +124,11 @@ if($_SESSION['id'] == ''){
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Mulai Tanggal</label>
-                                <input type="date" name="tanggal_start" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <input type="date" name="tanggal_start" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPassword1">Sampai Tanggal</label>
-                                <input type="date" name="tanggal_end" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <input type="date" name="tanggal_end" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
                             </div>
                             <!-- <div class="form-group">
                                 <label for="exampleInputPassword1">Nama Siswa</label>
