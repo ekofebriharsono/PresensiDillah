@@ -83,7 +83,7 @@ if($_SESSION['id'] == ''){
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item">
-              <a href="index.php" class="nav-link active">
+              <a href="index.php" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Rekap Presensi Siswa
@@ -91,7 +91,7 @@ if($_SESSION['id'] == ''){
               </a>
             </li>
             <li class="nav-item">
-              <a href="index2.php" class="nav-link">
+              <a href="index2.php" class="nav-link active">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Data Presensi Siswa
@@ -113,12 +113,12 @@ if($_SESSION['id'] == ''){
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-dark">Rekap Presensi Siswa</h1>
+              <h1 class="m-0 text-dark">Data Presensi Siswa</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Rekap Presensi Siswa</li>
+                <li class="breadcrumb-item active">Data Presensi Siswa</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -137,7 +137,7 @@ if($_SESSION['id'] == ''){
                     <div class="card-header">
                         <h3 class="card-title">Filter</h3>
                     </div>
-                    <form role="form" action="index.php" method="get">
+                    <form role="form" action="index2.php" method="get">
                         <div class="card-body">
                             <div class="form-group">
                               <?php
@@ -217,27 +217,25 @@ if($_SESSION['id'] == ''){
               //   $nama = " and nama %".$_GET['nama']."%";
               // }
 
-              $query = "select * from presensi where ".$kelas.$tanggal." group by nama order by nama asc";
+              $query = "select * from presensi where ".$kelas.$tanggal." order by kelas asc, nama asc";
               $res = mysqli_query($con, $query);
 
-              $queryHeaderDate = "select * from presensi where tanggal BETWEEN cast('$tgl_start' as date) and cast('$tgl_end' as date) group by tanggal";
-              $resHeaderDate = mysqli_query($con, $queryHeaderDate);
-              $resHeaderDateF = mysqli_query($con, $queryHeaderDate);
+              
 
             }
 
 
             if($isFilter){ ?>
             <div class="row">
-              <div class="col-md-12"> 
-                <form action="excel.php" method="post">
-                <input type="text" hidden name="kelas" value="<?php echo @$_GET['kelas'];?>">
-                  <input type="text" hidden name="tanggal_start" value="<?php echo $tgl_start;?>">
-                  <input type="text" hidden name="tanggal_end" value="<?php echo $tgl_end;?>">
-                  <input type="text" hidden name="query" value="<?php echo $query;?>">
+              <!-- <div class="col-md-12"> 
+                <form action="excel2.php" method="post">
+                <input type="text" hidden name="kelas" value="<?php // echo @$_GET['kelas'];?>">
+                  <input type="text" hidden name="tanggal_start" value="<?php // echo $tgl_start;?>">
+                  <input type="text" hidden name="tanggal_end" value="<?php // echo $tgl_end;?>">
+                  <input type="text" hidden name="query" value="<?php // echo $query;?>">
                 <center><button type="submit" class="btn btn-success">Export Excel</button></center>
                 </form>
-              </div>
+              </div> -->
               <!-- <div class="col-md-6"> 
                 <center><button class="btn btn-danger">Export PDF</button></center>
               </div> -->
@@ -257,37 +255,25 @@ if($_SESSION['id'] == ''){
                         <th>NIS</th>
                         <th>NAMA</th>
                         <th>KELAS</th>
-                        <?php while($rowHeaderDate = mysqli_fetch_array($resHeaderDate)){ ?>
-                          <th><?php echo $rowHeaderDate['tanggal']; ?></th>
-                        <?php } ?>
+                        <th>TANGGAL</th>
+                        <th>KET</th>
+                        <th>AKSI</th>
                       </tr>
                       </thead>
                       <tbody>
-                        <?php $i = 0; $j=0; while($row = mysqli_fetch_array($res)){ $i++; $j++;?>
+                        <?php while($row = mysqli_fetch_array($res)){ ?>
                           <tr>
                             <td><?php echo $row['nis']; ?></td>
                             <td><b><?php echo $row['nama']; ?></b></td>
                             <td><?php echo $row['kelas']; ?></td>
-                            <?php 
-                              $nisSiswa = $row['nis'];
-                              $isHadil = '-';
-                              $i = mysqli_query($con, $queryHeaderDate);
-                              while($j = mysqli_fetch_array($i)){ 
-                                $tanggalSiswa = $j['tanggal'];
-                                $queryTanggalPersiswa = "select keterangan from presensi where nis = $nisSiswa and tanggal = '$tanggalSiswa'";
-                                $resTanggalPersiswa = mysqli_query($con, $queryTanggalPersiswa);
-                                if($resTanggalPersiswa){
-                                  $rowTanggalPersiswa = mysqli_num_rows($resTanggalPersiswa);
-                                  if($rowTanggalPersiswa > 0){
-                                    $isHadir = 'Hadir';
-                                  } else {
-                                    $isHadir = '-';
-                                  }
-                                } else {
-                                  $isHadir = '-';
-                                } ?>
-                            <td><?php echo $isHadir; ?></td>
-                            <?php } ?>
+                            <td><?php echo $row['tanggal']; ?></td>
+                            <td><?php echo $row['keterangan']; ?></td>
+                            <td>
+                              <form action="index2.php" method="get">
+                                <input hidden type="number" name="id_presensi" value="<?php echo $row['id_presensi']; ?>">
+                                <button type="submit" class="btn btn-danger">Hapus</button>
+                              </form>
+                            </td>
                           </tr>
                         <?php  } ?>
                       </tbody>
@@ -296,9 +282,9 @@ if($_SESSION['id'] == ''){
                           <th>NIS</th>
                           <th>NAMA</th>
                           <th>KELAS</th>
-                          <?php while($rowHeaderDateF = mysqli_fetch_array($resHeaderDateF)){ ?>
-                          <th><?php echo $rowHeaderDateF['tanggal']; ?></th>
-                          <?php } ?>
+                          <th>TANGGAL</th>
+                          <th>KET</th>
+                          <th>AKSI</th>
                         </tr>
                       </tfoot>
                     </table>
