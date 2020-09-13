@@ -21,7 +21,7 @@
   <link rel="shortcut icon" href="smp8.png" />
 
 </head>
-<body id="bodycolor" style="background-color:grey;">
+<body id="bodycolor" style="background-image:url(https://scontent-sin6-2.xx.fbcdn.net/v/t1.0-9/10306380_533909006743855_3552988584089585748_n.jpg?_nc_cat=108&_nc_sid=dd9801&_nc_ohc=5R3XVYYfNPIAX-fVXFd&_nc_ht=scontent-sin6-2.xx&oh=65b0a4fd971553fa370ccc77c483a27c&oe=5F81DAB0);">
 <div class="hold-transition d-flex justify-content-center">
 <div class="login-box">
   <div class="login-logo">
@@ -46,7 +46,7 @@
             }
         }
     ?>
-      <form action="proses/presensiData.php" method="post">
+      <form action="proses/PresensiData.php" method="post">
         <p>Nama</p>
         <div class="input-group mb-3">
           <input type="input" name="nama" class="form-control" placeholder="Masukkan Nama Siswa" required>

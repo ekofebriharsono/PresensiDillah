@@ -210,7 +210,7 @@ if($_SESSION['id'] == ''){
                 $isTanggal = true;
                 $tgl_start = $_GET['tanggal_start'];
                 $tgl_end = $_GET['tanggal_end'];
-                $nama = " and tanggal BETWEEN cast('$tgl_start' as date) and cast('$tgl_end' as date)";
+                $tanggal = " and tanggal BETWEEN cast('$tgl_start' as date) and cast('$tgl_end' as date)";
               }
               // if(@$_GET['nama'] != ''){
               //   $isNama = true;
@@ -220,7 +220,7 @@ if($_SESSION['id'] == ''){
               $query = "select * from presensi where ".$kelas.$tanggal." order by kelas asc, nama asc";
               $res = mysqli_query($con, $query);
 
-              
+            
 
             }
 
